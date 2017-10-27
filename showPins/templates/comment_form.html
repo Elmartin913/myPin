@@ -1,0 +1,11 @@
+
+<div class="container">
+    <h3>Skomentuj</h3>
+    <div class="row">
+        <form method="POST" class="form-inline" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form }}
+            <button class="btn btn-info" type="submit">Dodaj</button>
+        </form>
+    </div>
+</div>

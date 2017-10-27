@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block galery %}
+
+<div class="container">
+    <p>Galeria: {{ user.username }}</p>
+    <div id="container">
+        <div class="row">
+        {% if photos %}
+            {% for photo in photos %}
+                <div class="col-md-4">
+                    <a href="/info/{{ photo.id }}">
+                        <img src="{{ photo.path.url }}" class="img-responsive img-rounded " />
+                    </a>
+                </div>
+            {% endfor %}
+        {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

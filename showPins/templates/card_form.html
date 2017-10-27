@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h3>Twój koszyk</h3>
+    <div class="row">
+        <form method="POST" class="form-inline" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% if card %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Zdjęcie</th>
+                        <th>Tytuł</th>
+                        <th>Cena</th>
+                        <!-- <th>Liczba</th> -->
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for c in card %}
+                    <tr>
+                        <td>
+                            <img src="{{ c.photo.path.url }}" class="img-rounded" height="40px">
+                        </td>
+                        <td>{{ c.photo }}</td>
+                        <td>{{ c.buy_price }} zł.</td>
+                        <!-- <td><input type="number" name="quantity" value="1" min="0" step="1"/></td> -->
+                        <td>
+                            <a href="/card_delete/{{ c.id }}">Usuń</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p>Brak zdjęc w koszyku</p>
+            {% endif %}
+            <div class="container">
+             <h3>Sposób dostawy</h3>
+            <label class="radio">
+                <input type="radio" name="optradio" value="1">
+                Odbiór osobisty (Warszawa, ul.Prosta 51)
+            </label><br>
+            <label class="radio">
+                <input type="radio" name="optradio" value="2">
+                Dostawa email ({{ request.user.email}})
+            </label><br>
+            <label  class="radio">
+                <input type="radio" name="optradio" value="3">
+                    Przesyłka pocztowa na adress
+                    <textarea name="delivery_target" value="" class="form-control" rows="3"></textarea>
+            </label><br>
+
+            <p></p>
+            <h3>Suma: {{ sum }} zł<input type="hidden" name="sum" value="{{ sum }}"></h3>
+            <button class="btn btn-info" type="submit">Potwierdz</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+
+
+

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block galery %}
+<div class="container">
+<h1>Informacje o zdjęciu</h1>
+    <div class="container">
+        <div class="row">
+            <p>id: {{ photo_info.id }}</p>
+            <p>user id: {{ photo_info.user.id }}</p>
+            <p>Tytuł: {{ photo_info.title}}</p>
+            <p>Uzytkownik: {{ photo_info.user.username }}</p>
+            <p>Opis: {{ photo_info_desc}}</p>
+            <p>Data dodania: {{ photo_info.creation_date }}</p>
+            <p>Liczba lików: {{ num_likes }}</p>
+            <p>Liczba komentarzy: {{ num_comments }}</p>
+            <p>Cena: {{ photo_info.price }}zł.</p>
+        </div>
+        <section> <!-- przyciski -->
+            <div class="container">
+
+                <div class="row">
+                    <form method ="POST" action="">{% csrf_token %}
+                        <button type="submit" class="btn btn-primary" name="like" value="1">Like</button>
+                    </form>
+                    <p></p>
+                    <a href="/add_to_collection/{{ photo_info.id }}"><button type="submit" class="btn btn-info">Kolekcjonuj</button></a>
+                    <a href="/other_galery/{{ photo_info.user.id }}"><button type="submit" class="btn btn-info" >Galeria użytkownika</button></a>
+                    <a href="/add_to_card/{{ photo_info.id }}"><button type="submit" class="btn btn-success">Do koszyka</button></a>
+                </div>
+            </div>
+            <p></p>
+        </section>
+        <div class="row"> <!-- zdjecie -->
+            <img src="{{ photo_info.path.url }}" class="img-responsive img-rounded " />
+        </div>
+        <section> <!-- komentarze -->
+            {% include 'comment_form.html' %}
+            <hr>
+            <div class="container">
+                {% if comments %}
+                    {% for comment in comments %}
+                        <div class="media">
+                        <div class="media-left">
+                            <img src="img_avatar2.png" class="media-object" style="width:45px">
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">{{ comment.user.username }}<small><i>    {{ comment.add_comment }}</i></small></h4>
+                            <p>{{ comment.comment }}</p>
+                            <hr>
+                        </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                <h3>Brak komentarzy</h3>
+                {% endif %}
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    <title>myPin</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="{% static 'js/app2.js' %}" type="text/javascript"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <img src="/media/logo.png" height="65px">
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse-4">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/card1">
+                            {% if len_card == 0 %}
+                            <button type="button" class="btn">Koszyk ({{ len_card }})</button>
+                            {% else %}
+                            <button type="button" class="btn btn-primary">Koszyk ({{ len_card }})</button>
+                            {% endif%}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/add_photo/{{ request.user.id }}">
+                        <button type="button" class="btn btn-success">Dodaj zdjecie</button>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/galery">
+                        <button type="button" class="btn">Cala galeria</button>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/galery/{{ request.user.id }}">
+                        <button type="button" class="btn">Moja kolekcja</button>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/profile/{{ request.user.id }}">
+                        <button type="button" class="btn">{{ request.user.username }}</button>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/logout">
+                        <button type="button" class="btn">Wyloguj</button>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section>
+        {% block content %}
+        {% endblock %}
+    </section>
+    <section>
+        {% block galery %}
+        {% endblock %}
+    </section>
+
+</body>
+</html>
+
+

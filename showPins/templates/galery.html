@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block galery %}
+<div class="container">
+<h1>Galeria</h1>
+    <div id="container">
+        <div class="row">
+        {% if all_photos %}
+            {% for photo in all_photos %}
+                <div class="col-md-4">
+                    <a href="/info/{{ photo.id }}">
+                        <img height="30px" src="{{ photo.path.url }}" class="img-responsive img-rounded"  />
+                    </a>
+                </div>
+            {% endfor %}
+        {% else %}
+                <p>Brak zdjec !!!</p>
+        {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

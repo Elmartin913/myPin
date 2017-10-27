@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class=" table-responsive">
+         <table class="table table-bordered">
+              <ul>
+                  <li>Imie: <b>{{ user.first_name }}</b></li>
+                  <li>Nazwisko: <b>{{ user.last_name }}</b></li>
+                  <li>Email: {{ user.email }}</li>
+                  <li>Opis: {{ user.user_desc }}</li>
+                  <a href="/update/{{ request.user.id }}">Zmien</a>
+              </ul>
+         </table>
+    </div>
+</div>
+
+<div class="container">
+<h1>Moja galeria</h1>
+    <div id="container" >
+        {% if usr_photos %}
+            {% for photo in usr_photos %}
+                <div class="col-md-4" style="border:1px solid #cecece;">
+                    <p></p>
+                    <a href="/info/{{ photo.id }}">
+                        <img src="{{ photo.path.url }}" class="img-responsive img-rounded " alt="" />
+                    </a>
+                    <p></p>
+                    <a href="/my_photo_delete/{{ photo.id }}"><button type="submit" class="btn btn-danger btn-sm" >Usuń</button></a>
+                    <a href="/photo_update/{{ photo.id }}"><button type="submit" class="btn btn-info btn-sm">Edytuj</button></a>
+                    <h5>Cena: {{ photo.price }} zł.    Sprzedano:</h5>
+                    <p></p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>
+                <a href="/add_photo/{{ request.user.id }}">
+                    <button type="button" class="btn btn-success">Dodaj zdjecie</button>
+                </a>
+            </p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Dodaj zdjecie</h2>
+<div class="row">
+    <form method="POST" class="form-inline" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit">
+    </form>
+    <hr>
+        {% if all_photos %}
+            {% for photo in all_photos %}
+                <div class="col-md-4">
+                    <img src="{{ photo.path.url }}" class="img-responsive img-rounded " />
+                </div>
+            {% endfor %}
+        {% else %}
+            <a href="/add_photo/{{ request.user.id }}">
+                <button type="button" class="btn btn-success" value="{{ request.user.id }}">Dodaj zdjecie</button>
+            </a>
+        {% endif %}
+</div>
+</div>
+{% endblock %}
+
+
+

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block galery %}
+<div class="container">
+<h2>Moja kolekcja</h2>
+    <div id="container">
+        <div class="row">
+        {% if photos %}
+            {% for photo in photos %}
+                <div class="col-md-4" style="border:1px solid #cecece;">
+                    <p></p>
+                    <a href="/info/{{ photo.photo_id }}">
+                        <img src="{{ photo.photo.path.url }}" class="img-responsive img-rounded " />
+                    </a>
+                    <p></p>
+                    <a href="/delete_collection_photo/{{ photo.photo_id }}"><button type="submit" class="btn btn-info btn-sm" >Usuń</button></a>
+                    <a href="/add_to_card/{{ photo.photo_id }}"><button type="submit" class="btn btn-success btn-sm">Do koszyka</button></a>
+                    <p></p>
+                </div>
+            {% endfor %}
+            {% else %}
+                <p>Brak zdjęć w kolekcji</p>
+        {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

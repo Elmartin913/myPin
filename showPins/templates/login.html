@@ -1,0 +1,12 @@
+{% extends 'start.html' %}
+
+{% block content %}
+    <form method="POST" class="form form-right">
+
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <input type="submit">
+    </form>
+
+{% endblock %}
