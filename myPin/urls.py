@@ -85,7 +85,7 @@ urlpatterns = [
     url(r'^photo_update/(?P<photo_id>(\d)+)$', photo_update,
         name="photo_update"),
 
-    #nie dziala
+
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
